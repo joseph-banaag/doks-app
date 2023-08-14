@@ -22,7 +22,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <ClerkProvider>
-                <body className={ubuntu.className}>
+                <body className={`${ubuntu.className} bg-dark-1`}>
 
                     {children}
 
