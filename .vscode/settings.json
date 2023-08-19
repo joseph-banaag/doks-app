@@ -6,12 +6,14 @@
         "hookform",
         "leftsidebar",
         "nextjs",
+        "placehold",
         "rightsidebar",
         "searchbar",
         "Shadcn",
         "tailwindcss",
         "tiktok",
         "Topbar",
-        "trpc"
+        "trpc",
+        "uploadthing"
     ]
 }
