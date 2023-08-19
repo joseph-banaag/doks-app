@@ -17,7 +17,7 @@ import { Button } from '../ui/button';
 import Image from 'next/image';
 import { Textarea } from '../ui/textarea';
 import { isBase64Image } from '@/lib/utils';
-import {useUploadThing} from "@/lib/uploadthing"
+import { useUploadThing } from "@/lib/uploadthing"
 
 // this is the type declaration for the properties passed to the AccountProfile component
 interface Props {
@@ -36,6 +36,7 @@ interface Props {
 export default function AccountProfile({ user, btnTitle }: Props) {
 
     const [files, setFiles] = useState<File[]>([])
+    const { startUpload } = useUploadThing("media")
 
     // What this block do: This function will handle the selection of the image and used the FileReader API to perform the intended operations.
     const handleImage = (e: ChangeEvent<HTMLInputElement>, fieldChange: (value: string) => void) => {
@@ -71,16 +72,22 @@ export default function AccountProfile({ user, btnTitle }: Props) {
     });
 
     // what this block do: 
-    function onSubmit(values: z.infer<typeof UserValidation>) {
+    const onSubmit = async (values: z.infer<typeof UserValidation>) => {
         const blob = values.profile_photo;
         const hasImageChanged = isBase64Image(blob)
 
         if (hasImageChanged) {
-            const imageResponse = 
+            const imageResponse = await startUpload(files)
+
+            if (imageResponse && imageResponse[0].url) {
+                values.profile_photo = imageResponse[0].url;
+            }
+
         }
     }
 
-
+    //  TODO: Update user profile
+    
     return (
         <Form {...form}>
             <form
