@@ -8,16 +8,16 @@ import * as z from "zod";
 import {
     Form,
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
     FormLabel,
-    FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Button } from '../ui/button';
 import Image from 'next/image';
 import { Textarea } from '../ui/textarea';
+import { isBase64Image } from '@/lib/utils';
+import {useUploadThing} from "@/lib/uploadthing"
 
 // this is the type declaration for the properties passed to the AccountProfile component
 interface Props {
@@ -37,26 +37,29 @@ export default function AccountProfile({ user, btnTitle }: Props) {
 
     const [files, setFiles] = useState<File[]>([])
 
+    // What this block do: This function will handle the selection of the image and used the FileReader API to perform the intended operations.
     const handleImage = (e: ChangeEvent<HTMLInputElement>, fieldChange: (value: string) => void) => {
         e.preventDefault();
 
         const fileReader = new FileReader();
 
-        if (e.target.files && e.target.files?.length > 1) {
+        if (e.target.files && e.target.files.length > 0) {
             const file = e.target.files[0]
 
             setFiles(Array.from(e.target.files));
+            if (!file.type.includes('image')) return;
+
+            fileReader.onload = async (event) => {
+                const imageDataUrl = event.target?.result?.toString() || "";
+                fieldChange(imageDataUrl)
+            }
+
+            fileReader.readAsDataURL(file)
         }
 
     }
 
-    function onSubmit(values: z.infer<typeof UserValidation>) {
-        // Do something with the form values.
-        // ✅ This will be type-safe and validated.
-        console.log(values)
-    }
-
-
+    // what this block do: this is a form validation that will generate data based on user object which will come from currentUser from @clerk/nextjs and is using zodResolver for the correct type declaration in typescript 
     const form = useForm({
         resolver: zodResolver(UserValidation),
         defaultValues: {
@@ -66,6 +69,17 @@ export default function AccountProfile({ user, btnTitle }: Props) {
             bio: user?.bio || ""
         }
     });
+
+    // what this block do: 
+    function onSubmit(values: z.infer<typeof UserValidation>) {
+        const blob = values.profile_photo;
+        const hasImageChanged = isBase64Image(blob)
+
+        if (hasImageChanged) {
+            const imageResponse = 
+        }
+    }
+
 
     return (
         <Form {...form}>
