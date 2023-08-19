@@ -26,6 +26,8 @@ const nextConfig = {
     typescript: {
       ignoreBuildErrors: true,
     },
+    formats: ['image/avif', 'image/webp'],
+     unoptimized: true,
   },
 };
 

@@ -39,6 +39,7 @@ export default function AccountProfile({ user, btnTitle }: Props) {
     const { startUpload } = useUploadThing("media")
 
     // What this block do: This function will handle the selection of the image and used the FileReader API to perform the intended operations.
+    // * further explanation here: https://chat.openai.com/c/23c343e7-149d-423d-99e8-fd6f2a69b6e8
     const handleImage = (e: ChangeEvent<HTMLInputElement>, fieldChange: (value: string) => void) => {
         e.preventDefault();
 
@@ -60,7 +61,8 @@ export default function AccountProfile({ user, btnTitle }: Props) {
 
     }
 
-    // what this block do: this is a form validation that will generate data based on user object which will come from currentUser from @clerk/nextjs and is using zodResolver for the correct type declaration in typescript 
+    // what this block do: this is a form validation that will generate data based on user object which will come from currentUser from @clerk/nextjs and is using zodResolver for the correct type declaration in typescript.
+    // * further explanation here: https://chat.openai.com/c/656f59ed-4a89-48ca-af15-a85b03a66efe
     const form = useForm({
         resolver: zodResolver(UserValidation),
         defaultValues: {
@@ -71,7 +73,8 @@ export default function AccountProfile({ user, btnTitle }: Props) {
         }
     });
 
-    // what this block do: 
+    // what this block do: this function will change the value of the profile_photo and change it with a valid base64-encoded image and it will be uploaded to the cloud via uploadthing and then it will display the new uploaded image url as the new profile_photo value. 
+    //* further explanation here: https://chat.openai.com/?model=text-davinci-002-render-sha
     const onSubmit = async (values: z.infer<typeof UserValidation>) => {
         const blob = values.profile_photo;
         const hasImageChanged = isBase64Image(blob)
@@ -87,7 +90,7 @@ export default function AccountProfile({ user, btnTitle }: Props) {
     }
 
     //  TODO: Update user profile
-    
+
     return (
         <Form {...form}>
             <form
