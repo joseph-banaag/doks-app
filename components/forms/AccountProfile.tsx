@@ -18,6 +18,8 @@ import Image from 'next/image';
 import { Textarea } from '../ui/textarea';
 import { isBase64Image } from '@/lib/utils';
 import { useUploadThing } from "@/lib/uploadthing"
+import { UpdateUser } from '@/lib/actions/user.actions';
+import { usePathname, useRouter } from 'next/navigation';
 
 // this is the type declaration for the properties passed to the AccountProfile component
 interface Props {
@@ -37,6 +39,9 @@ export default function AccountProfile({ user, btnTitle }: Props) {
 
     const [files, setFiles] = useState<File[]>([])
     const { startUpload } = useUploadThing("media")
+    const router = useRouter();
+    const pathname = usePathname();
+
 
     // What this block do: This function will handle the selection of the image and used the FileReader API to perform the intended operations.
     // * further explanation here: https://chat.openai.com/c/23c343e7-149d-423d-99e8-fd6f2a69b6e8
@@ -87,9 +92,18 @@ export default function AccountProfile({ user, btnTitle }: Props) {
             }
 
         }
+        await UpdateUser({
+            userId: user.id,
+            username: values.username,
+            name: values.name,
+            bio: values.bio,
+            image: values.profile_photo,
+            path: pathname
+
+        })
+            
     }
 
-    //  TODO: Update user profile
 
     return (
         <Form {...form}>
