@@ -6,20 +6,13 @@ import React from 'react'
 
 export default function Topbar() {
 
-  // topbar logo
-  const logo = {
-    src: "/assets/logo.png",
-    name: "logo",
-    src2: "/assets/logout.svg",
-    name2: "logout",
-  }
 
   return (
     <nav className='topbar'>
       <Link href="/" className="flex items-center gap-4">
         <Image
-          src={logo.src}
-          alt={logo.name}
+          src="/assets/logo.png"
+          alt="doks logo"
           width={32}
           height={32}
         />
@@ -32,8 +25,8 @@ export default function Topbar() {
           <SignOutButton>
             <div className="flex cursor-pointer">
               <Image
-                src={logo.src2}
-                alt={logo.name2}
+                src="/assets/logout.svg"
+                alt="logout button"
                 width={24}
                 height={24}
               />

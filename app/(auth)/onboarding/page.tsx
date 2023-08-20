@@ -29,7 +29,7 @@ export default async function Page() {
                     user={userData}
                     btnTitle="Continue" />
             </section>
-            
+
         </main>
     )
 }

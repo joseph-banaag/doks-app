@@ -13,7 +13,7 @@ interface Params {
     path: string
 }
 
-export async function UpdateUser({
+export async function updateUser({
     userId,
     username,
     name,
@@ -50,6 +50,19 @@ export async function UpdateUser({
      throw new Error(`Failed to create/update user: ${error.message}`)
    }
 }
-
-
 // this code snippet is explained thoroughly by GPT on this link: https://www.youtube.com/watch?v=O5cmLDVTgAs&t=4478s
+
+export async function fetchUser(userId: string) {
+    try {
+        connectToDB();
+
+        return await User
+            .findOne({ id: userId })
+            // .populate({
+            //     path: "communities",
+            //     model: Community,
+            // })
+    } catch (error: any) {
+        throw new Error(`Failed to fetch user: ${error.message}`)
+    }
+}

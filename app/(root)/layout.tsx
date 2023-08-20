@@ -15,7 +15,7 @@ const ubuntu = Ubuntu({
 
 export const metadata: Metadata = {
   title: 'doks',
-  description: 'doks application is a social media application',
+  description: 'This is a clone of threads application',
 }
 
 export default function RootLayout({
