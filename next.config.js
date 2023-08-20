@@ -5,6 +5,7 @@ const nextConfig = {
     serverComponentsExternalPackages: ["mongoose"],
   },
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",
@@ -23,11 +24,8 @@ const nextConfig = {
         hostname: "placehold.co",
       },
     ],
-    typescript: {
-      ignoreBuildErrors: true,
-    },
     formats: ['image/avif', 'image/webp'],
-     unoptimized: true,
+     
   },
 };
 

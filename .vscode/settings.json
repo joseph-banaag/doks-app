@@ -1,20 +1,27 @@
 {
-    "cSpell.words": [
-        "Bottombar",
-        "doks",
-        "glassmorphism",
-        "hookform",
-        "leftsidebar",
-        "nextjs",
-        "onboarded",
-        "placehold",
-        "rightsidebar",
-        "searchbar",
-        "Shadcn",
-        "tailwindcss",
-        "tiktok",
-        "Topbar",
-        "trpc",
-        "uploadthing"
-    ]
+  "cSpell.words": [
+    "Bottombar",
+    "doks",
+    "glassmorphism",
+    "hookform",
+    "leftsidebar",
+    "nextjs",
+    "onboarded",
+    "placehold",
+    "rightsidebar",
+    "searchbar",
+    "Shadcn",
+    "tailwindcss",
+    "tiktok",
+    "Topbar",
+    "trpc",
+    "uploadthing"
+  ],
+  "editor.fontLigatures": true,
+  "editor.fontFamily": "'JetBrains Mono'",
+  "editor.formatOnSave": true,
+  "editor.minimap.maxColumn": 80,
+  "editor.minimap.renderCharacters": false,
+  "editor.fontSize": 13,
+  "editor.fontWeight": "normal"
 }

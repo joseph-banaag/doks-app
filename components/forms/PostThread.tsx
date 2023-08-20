@@ -24,7 +24,7 @@ interface Props {
     userId: string;
 }
 
-export default function PostThread({ userId }: Props) {
+export default function PostThread({ userId: userId }: Props) {
     const router = useRouter();
     const pathname = usePathname();
 
