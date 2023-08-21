@@ -43,7 +43,7 @@ export default function ThreadCard({
     // TODO: implement the button functionalities: buttons start at line 80 
 
     return (
-        <article className='flex w-full flex-col rounded-xl bg-dark-2/80 p-7'>
+        <article className={`flex w-full flex-col rounded-xl  ${isComment ? "px-0 xs:px-7" : "bg-dark-2/80 p-7"}`}>
             <div className="flex items-start justify-between">
                 <div className="flex flex-1 w-full gap-4">
 
@@ -94,6 +94,7 @@ export default function ThreadCard({
                                         like
                                     </span>
                                 </div>
+
 
                                 {/* comment/reply button */}
                                 <div className="group relative flex justify-center">
