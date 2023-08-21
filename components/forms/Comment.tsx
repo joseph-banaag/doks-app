@@ -1,5 +1,8 @@
+
 "use client";
 
+
+import React from "react";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { useOrganization } from "@clerk/nextjs";
@@ -15,36 +18,41 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
 
-import { ThreadValidation } from "@/lib/validations/thread";
-import { createThread } from "@/lib/actions/thread.actions";
+import { CommentValidation } from "@/lib/validations/thread";
+// import { createThread } from "@/lib/actions/thread.actions";
 
 interface Props {
-    userId: string;
+    threadId: string,
+    currentUserImg: string,
+    currentUserId: string
 }
 
-export default function PostThread({ userId: userId }: Props) {
+export default function Comment({
+    threadId,
+    currentUserImg,
+    currentUserId
+}: Props) {
     const router = useRouter();
     const pathname = usePathname();
 
     const { organization } = useOrganization();
 
-    const form = useForm<z.infer<typeof ThreadValidation>>({
-        resolver: zodResolver(ThreadValidation),
+    const form = useForm<z.infer<typeof CommentValidation>>({
+        resolver: zodResolver(CommentValidation),
         defaultValues: {
             thread: "",
-            accountId: userId,
         },
     });
 
-    const onSubmit = async (values: z.infer<typeof ThreadValidation>) => {
-        await createThread({
-            text: values.thread,
-            author: userId,
-            communityId: organization ? organization.id : null,
-            path: pathname,
-        });
+    const onSubmit = async (values: z.infer<typeof CommentValidation>) => {
+        // await createThread({
+        //     text: values.thread,
+        //     author: currentUserId,
+        //     communityId: organization ? organization.id : null,
+        //     path: pathname,
+        // });
 
         router.push("/");
     };
@@ -64,7 +72,9 @@ export default function PostThread({ userId: userId }: Props) {
                                 Content
                             </FormLabel>
                             <FormControl className='no-focus border border-dark-4 bg-dark-3 text-light-1'>
-                                <Textarea rows={15} {...field} />
+                                <Input
+                                    type='text'
+                                    {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -76,5 +86,5 @@ export default function PostThread({ userId: userId }: Props) {
                 </Button>
             </form>
         </Form>
-    );
+    )
 }

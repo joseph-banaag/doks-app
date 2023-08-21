@@ -6,6 +6,7 @@ import { ThreadValidation } from "../validations/thread";
 import Thread from "../models/thread.model";
 import User from "../models/user.model";
 import { revalidatePath } from "next/cache";
+import { connect } from "http2";
 
 interface Params {
   text: string;
@@ -47,8 +48,7 @@ export async function fetchPosts(pageNumber = 1, pageSize = 20) {
   const skipAmount = (pageNumber - 1) * pageSize;
 
   // Fetch the posts that have no parents (this is the top-level threads...)
-  const postsQuery = Thread
-    .find({ parentId: { $in: [null, undefined] } })
+  const postsQuery = Thread.find({ parentId: { $in: [null, undefined] } })
     .sort({ createdAt: "desc" }) // this will display the result in descending order means that new one will be shown first
     .skip(skipAmount)
     .limit(pageSize)
@@ -73,4 +73,44 @@ export async function fetchPosts(pageNumber = 1, pageSize = 20) {
   // this code will implement the pagination as it will create the next page if the count is more than the skipAmount.
   const isNext = totalPostsCount > skipAmount + posts.length;
   return { posts, isNext };
+}
+
+export async function fetchThreadById(id: string) {
+  connectToDB();
+
+  // TODO: populate Community
+
+  try {
+    const thread = await Thread.findById(id)
+      .populate({
+        path: "author",
+        model: User,
+        select: "_id id name image",
+      })
+      .populate({
+        path: "children",
+        populate: [
+          {
+            path: "author",
+            model: User,
+            select: "_id id name parentId image",
+          },
+          {
+            path: "children",
+            model: Thread,
+            populate: {
+              path: "author",
+              model: User,
+              select: "_id id name parentId image",
+            },
+          },
+        ],
+      })
+      .exec();
+
+    return thread;
+    
+  } catch (error: any) {
+    throw new Error(`There was an error fetching the thread: ${error.message}`);
+  }
 }
