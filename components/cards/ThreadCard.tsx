@@ -40,12 +40,13 @@ export default function ThreadCard({
 
 
 
-    // TODO: implement the button functionality
+    // TODO: implement the button functionalities: buttons start at line 80 
 
     return (
         <article className='flex w-full flex-col rounded-xl bg-dark-2/80 p-7'>
             <div className="flex items-start justify-between">
                 <div className="flex flex-1 w-full gap-4">
+
                     <div className="flex flex-col items-center justify-center">
                         <Link href={`/profile/${author.id}`}
                             className='relative h-11 w-11'
@@ -79,39 +80,70 @@ export default function ThreadCard({
                         {/* Button functions below this line */}
                         <div className="mt-5 flex-flex-col gap-">
                             <div className='flex gap-3.5'>
-                                <Image
-                                    src="/assets/heart-gray.svg"
-                                    alt="heart"
-                                    width={24}
-                                    height={24}
-                                    className='cursor-pointer object-contain'
-                                />
 
-                                <Link href={`/thread/${id}`}>
+                                {/* like/heart button */}
+                                <div className="group relative flex justify-center">
                                     <Image
-                                        src="/assets/reply.svg"
-                                        alt="reply"
+                                        src="/assets/heart-gray.svg"
+                                        alt="heart"
                                         width={24}
                                         height={24}
                                         className='cursor-pointer object-contain'
                                     />
-                                </Link>
+                                    <span className="absolute top-7 scale-0 rounded bg-gray-800 p-1 text-[11px] transition-all ease-in-out duration-300 text-white group-hover:scale-100">
+                                        like
+                                    </span>
+                                </div>
 
-                                <Image
-                                    src="/assets/repost.svg"
-                                    alt="report"
-                                    width={24}
-                                    height={24}
-                                    className='cursor-pointer object-contain'
-                                />
+                                {/* comment/reply button */}
+                                <div className="group relative flex justify-center">
+                                    <Link href={`/thread/${id}`}>
+                                        <Image
+                                            src="/assets/reply.svg"
+                                            alt="reply"
+                                            width={24}
+                                            height={24}
+                                            className='cursor-pointer object-contain'
+                                        />
+                                    </Link>
 
-                                <Image
-                                    src="/assets/share.svg"
-                                    alt="share"
-                                    width={24}
-                                    height={24}
-                                    className='cursor-pointer object-contain'
-                                />
+                                    <span className="absolute top-7 scale-0 rounded bg-gray-800 p-1 text-[11px]  transition-all ease-in-out duration-300 text-white group-hover:scale-100">
+                                        reply
+                                    </span>
+                                </div>
+
+
+                                {/* repost button */}
+                                <div className="group relative flex justify-center">
+                                    <Image
+                                        src="/assets/repost.svg"
+                                        alt="report"
+                                        width={24}
+                                        height={24}
+                                        className='cursor-pointer object-contain'
+                                    />
+
+                                    <span className="absolute top-7 scale-0 rounded bg-gray-800 p-1 text-[11px]  transition-all ease-in-out duration-300 text-white group-hover:scale-100">
+                                        repost
+                                    </span>
+                                </div>
+
+
+                                {/* share button */}
+                                <div className="group relative flex justify-center">
+                                    <Image
+                                        src="/assets/share.svg"
+                                        alt="share"
+                                        width={24}
+                                        height={24}
+                                        className='cursor-pointer object-contain'
+                                    />
+
+                                    <span className="absolute top-7 scale-0 rounded bg-gray-800 p-1 text-[11px]  transition-all ease-in-out duration-300 text-white group-hover:scale-100">
+                                        share
+                                    </span>
+                                </div>
+
                             </div>
                             {isComment && comments.length > 0 && (
                                 <Link href={`/thread/${id}`}>
