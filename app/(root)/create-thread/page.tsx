@@ -1,8 +1,8 @@
+import React from 'react'
 import PostThread from '@/components/forms/PostThread';
 import { fetchUser } from '@/lib/actions/user.actions';
 import { currentUser } from '@clerk/nextjs'
 import { redirect } from 'next/navigation'
-import React from 'react'
 
 export default async function Page() {
     const user = await currentUser();
