@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/tabs"
 import { profileTabs } from "@/constants/index"
 import Image from "next/image";
+import ThreadsTab from "@/components/shared/ThreadsTab";
 
 
 export default async function Page() {
@@ -50,7 +51,12 @@ export default async function Page() {
                       className="object-contain"
                     />
                     <p className="max-sm:hidden">{tabs.label}</p>
-
+                    {/* below will display the number of threads */}
+                    {tabs.label === "Threads" && (
+                      <p className="ml-1 rounded-md bg-primary-500 py-1 px-2 !text-[11px] text-light-2">
+                        {userInfo?.threads.length}
+                      </p>
+                    )}
 
                     <span className="absolute top-10 scale-0 rounded bg-primary-500 p-1 text-[11px] transition-all ease-in-out duration-300 text-white group-hover:scale-100">
                       <p className="max-sm:flex hidden">{tabs.label}</p>
@@ -62,9 +68,20 @@ export default async function Page() {
             })}
 
           </TabsList>
-          <TabsContent value="thread" className="text-light-1">This is your threads tab content.</TabsContent>
-          <TabsContent value="something1" className="text-light-1">this is where your something 1 tab content will be displayed.</TabsContent>
-          <TabsContent value="something2" className="text-light-1">this is where your something 2 tab content will be displayed.</TabsContent>
+
+          {profileTabs.map((tabs) => {
+            return (
+              <TabsContent key={tabs.label} value={tabs.value} className="w-full text-light-1">
+                <ThreadsTab
+                  currentUser={user.id}
+                  accountId={userInfo.id}
+                  accountType="User"
+                />
+
+              </TabsContent>
+
+            )
+          })}
         </Tabs>
 
       </div>
