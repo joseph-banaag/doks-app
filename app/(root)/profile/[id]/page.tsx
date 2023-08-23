@@ -63,8 +63,9 @@ export default async function Page() {
                       )}
                     </div>
 
-                    <span className="absolute top-12 scale-0 rounded bg-primary-500 p-1 text-[11px] transition-all ease-in-out duration-300 text-white group-hover:scale-100">
-                      <p className="max-sm:flex hidden">{tabs.label}</p>
+
+                    <span className="absolute top-12 scale-0 rounded bg-primary-500 p-1 text-[11px] transition-all ease-in-out duration-300 text-white group-hover:scale-100 max-sm:flex hidden">
+                      <p>{tabs.label}</p>
                     </span>
                   </TabsTrigger>
 

@@ -66,10 +66,10 @@ export async function fetchUserPosts(userId: string) {
   try {
     connectToDB();
 
-    // Find all thread created by the user with the given userId
-
     //TODO: populate community
 
+
+    // Find all thread created by the user with the given userId
     const threads = await User.findOne({ id: userId }).populate({
       path: "threads",
       model: Thread,

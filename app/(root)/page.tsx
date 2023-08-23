@@ -12,7 +12,7 @@ export default async function Home() {
 
     <>
       <h1 className="head-text text-left">
-        doks-application
+        all doks
       </h1>
 
       <section className="mt-9 flex flex-col gap-10 ">
