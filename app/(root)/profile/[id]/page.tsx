@@ -73,7 +73,7 @@ export default async function Page() {
             return (
               <TabsContent key={tabs.label} value={tabs.value} className="w-full text-light-1">
                 <ThreadsTab
-                  currentUser={user.id}
+                  currentUserId={user.id}
                   accountId={userInfo.id}
                   accountType="User"
                 />

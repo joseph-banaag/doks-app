@@ -25,7 +25,6 @@ import { isBase64Image } from "@/lib/utils";
 import { UserValidation } from "@/lib/validations/user";
 import { updateUser } from "@/lib/actions/user.actions";
 
-// this is the type declaration for the properties passed to the AccountProfile component
 interface Props {
     user: {
         id: string;
@@ -39,15 +38,14 @@ interface Props {
 }
 
 const AccountProfile = ({ user, btnTitle }: Props) => {
-    const router = useRouter();
-    const pathname = usePathname();
+    const router = useRouter(); // this will be use to redirect the user to specified url
+    const pathname = usePathname(); // this will check the current active url  
+    
     const { startUpload } = useUploadThing("media");
 
     const [files, setFiles] = useState<File[]>([]);
 
 
-    // what this block do: this is a form validation that will generate data based on user object which will come from currentUser from @clerk/nextjs and is using zodResolver for the correct type declaration in typescript.
-    // * further explanation here: https://chat.openai.com/c/656f59ed-4a89-48ca-af15-a85b03a66efe
     const form = useForm<z.infer<typeof UserValidation>>({
         resolver: zodResolver(UserValidation),
         defaultValues: {
@@ -59,8 +57,6 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
     });
 
 
-    // what this block do: this function will change the value of the profile_photo and change it with a valid base64-encoded image and it will be uploaded to the cloud via uploadthing and then it will display the new uploaded image url as the new profile_photo value. 
-    //* further explanation here: https://chat.openai.com/?model=text-davinci-002-render-sha
     const onSubmit = async (values: z.infer<typeof UserValidation>) => {
         const blob = values.profile_photo;
 
@@ -91,8 +87,6 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
 
 
 
-    // What this block do: This function will handle the selection of the image and used the FileReader API to perform the intended operations.
-    // * further explanation here: https://chat.openai.com/c/23c343e7-149d-423d-99e8-fd6f2a69b6e8
     const handleImage = (
         e: ChangeEvent<HTMLInputElement>,
         fieldChange: (value: string) => void
@@ -116,9 +110,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
         }
     };
 
-
-
-
+    // * ******************
     return (
         <Form {...form}>
             <form
