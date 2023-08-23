@@ -14,6 +14,8 @@ import Image from "next/image";
 import ThreadsTab from "@/components/shared/ThreadsTab";
 
 
+
+
 export default async function Page() {
 
   const user = await currentUser();
@@ -43,22 +45,25 @@ export default async function Page() {
                 <>
 
                   <TabsTrigger key={tabs.label} value={tabs.value} className="tab group relative">
-                    <Image
-                      src={tabs.icon}
-                      alt={tabs.label}
-                      width={28}
-                      height={28}
-                      className="object-contain"
-                    />
-                    <p className="max-sm:hidden">{tabs.label}</p>
-                    {/* below will display the number of threads */}
-                    {tabs.label === "Threads" && (
-                      <p className="ml-1 rounded-md bg-primary-500 py-1 px-2 !text-[11px] text-light-2">
-                        {userInfo?.threads.length}
-                      </p>
-                    )}
 
-                    <span className="absolute top-10 scale-0 rounded bg-primary-500 p-1 text-[11px] transition-all ease-in-out duration-300 text-white group-hover:scale-100">
+                    <div className="relative flex justify-center items-center p-3">
+                      <Image
+                        src={tabs.icon}
+                        alt={tabs.label}
+                        width={28}
+                        height={28}
+                        className="object-contain"
+                      />
+                      <p className="max-sm:hidden ml-1">{tabs.label}</p>
+                      {/* below will display the number of threads */}
+                      {tabs.label === "Threads" && (
+                        <p className="absolute top-0 right-0 rounded-md bg-primary-500 py-.5 px-1 !text-[11px] text-light-2 border-[.5px] border-gray-600">
+                          {userInfo?.threads.length}
+                        </p>
+                      )}
+                    </div>
+
+                    <span className="absolute top-12 scale-0 rounded bg-primary-500 p-1 text-[11px] transition-all ease-in-out duration-300 text-white group-hover:scale-100">
                       <p className="max-sm:flex hidden">{tabs.label}</p>
                     </span>
                   </TabsTrigger>

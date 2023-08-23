@@ -68,7 +68,7 @@
     }
 
     .bottombar {
-        @apply fixed bottom-0 z-10 w-full rounded-t-3xl bg-dark-2 p-3 backdrop-blur-lg xs:px-7 md:hidden;
+        @apply fixed bottom-0 z-10 w-full shadow-inner shadow-dark-4 rounded-t-3xl bg-dark-2 p-3 backdrop-blur-lg xs:px-7 md:hidden;
     }
 
     .bottombar_container {
@@ -76,7 +76,7 @@
     }
 
     .bottombar_link {
-        @apply relative flex flex-col items-center gap-2 rounded-lg p-2 sm:flex-1 sm:px-2 sm:py-2.5;
+        @apply relative flex flex-col items-center gap-2 rounded-lg p-2 sm:flex-1 sm:px-2 sm:py-3;
     }
 
     .leftsidebar {
@@ -134,7 +134,7 @@
 
     /* Tab */
     .tab {
-        @apply flex min-h-[50px] flex-1 items-center gap-3 bg-dark-2 text-light-2 data-[state=active]:bg-[#0e0e12] data-[state=active]:text-light-2 !important;
+        @apply flex flex-1 items-center gap-3 bg-dark-2 rounded-2xl text-light-2 data-[state=active]:bg-[#0e0e12] data-[state=active]:text-light-2 !important;
     }
 
     .no-focus {

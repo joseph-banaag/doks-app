@@ -100,7 +100,7 @@ export default function ThreadCard({
                                 <div className="group relative flex justify-center">
                                     <Link href={`/thread/${id}`}>
                                         <Image
-                                            src="/assets/reply.svg"
+                                            src="/assets/reply1.svg"
                                             alt="reply"
                                             width={24}
                                             height={24}

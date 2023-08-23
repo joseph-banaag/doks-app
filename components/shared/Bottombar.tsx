@@ -10,8 +10,8 @@ export default function Bottombar() {
 
     const pathname = usePathname() // this will display the current active link
     return (
-        <section className="bottombar">
-            <div className="bottombar_container">
+        <section className="bottombar ">
+            <div className="bottombar_container ">
                 {sidebarLinks.map((link) => {
                     const isActive = pathname === link.route
 

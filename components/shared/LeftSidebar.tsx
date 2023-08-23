@@ -27,8 +27,8 @@ export default function LeftSidebar() {
               <Image
                 src={link.imgURL}
                 alt={link.label}
-                width={24}
-                height={24}
+                width={28}
+                height={28}
               />
               <p className="text-light-1 max-lg:hidden">
                 {link.label}
