@@ -15,6 +15,8 @@ interface Params {
   path: string;
 }
 
+
+// Note: the parameter inside the () of a function is the data input of any kind that the function is expecting to receive when the parameter is called inside the function. 
 export async function createThread({
   text,
   author,
@@ -49,7 +51,7 @@ export async function fetchPosts(pageNumber = 1, pageSize = 20) {
 
   // Fetch the posts that have no parents (this is the top-level threads...)
   const postsQuery = Thread.find({ parentId: { $in: [null, undefined] } })
-    .sort({ createdAt: "desc" }) // this will display the result in descending order means that new one will be shown first
+    .sort({ createdAt: -1 }) // this will display the result in descending order means that new one will be shown first
     .skip(skipAmount)
     .limit(pageSize)
     .populate({ path: "author", model: User })

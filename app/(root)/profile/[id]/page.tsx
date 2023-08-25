@@ -16,13 +16,13 @@ import ThreadsTab from "@/components/shared/ThreadsTab";
 
 
 
-export default async function Page() {
+export default async function Page({ params }: { params: { id: string } }) {
 
   const user = await currentUser();
 
   if (!user) return null;
 
-  const userInfo = await fetchUser(user.id) // this line will get the userInformation for the database from fetchUser function
+  const userInfo = await fetchUser(params.id) // this line will get the userInformation for the database from fetchUser function
 
   if (!userInfo?.onboarded) redirect('/onboarding')  // this line will redirect the user to onboarding if there is no user information in the database 
 

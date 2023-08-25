@@ -79,13 +79,13 @@ export async function fetchUserPosts(userId: string) {
         populate: {
           path: "author",
           model: User,
-          select: "name image  id",
+          select: "name image  id"
         },
       },
     });
 
     return threads;
   } catch (error: any) {
-    throw new Error(`No current user's post ${error.message}`);
+    throw new Error(`Failed to get user's post ${error.message}`);
   }
 }

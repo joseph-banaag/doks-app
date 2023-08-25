@@ -20,13 +20,13 @@ export default function LeftSidebar() {
         {sidebarLinks.map((link) => {
           const isActive = pathname === link.route
 
-          if (link.route === '/profile') link.route = `${link.route}/${userId}`
+          if (link.route === '/profile') link.route = `/profile/${userId}`
 
           return (
             <Link
               href={link.route}
               key={link.label}
-              className={`leftsidebar_link group relative flex  justify-center  ${isActive && 'bg-primary-500'}`}
+              className={`leftsidebar_link group relative ${isActive && 'bg-primary-500'}`}
             >
               <Image
                 src={link.imgURL}
@@ -38,7 +38,7 @@ export default function LeftSidebar() {
                 {link.label}
               </p>
 
-              <span className="absolute -bottom-8 scale-0 rounded bg-primary-500 p-1 text-[11px] transition-all ease-in-out duration-300 text-white group-hover:scale-100 max-lg:flex hidden">
+              <span className="absolute -bottom-8 right-0 left-0 justify-center translate-x-0 scale-0 rounded bg-primary-500 p-1 text-[11px] transition-all ease-in-out duration-300 text-white group-hover:scale-100 hidden max-lg:flex ">
                 <p>{link.label.split(/\s+/)[0]}</p>
 
               </span>
