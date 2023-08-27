@@ -6,9 +6,12 @@ import { redirect } from "next/navigation";
 import { fetchUser } from "@/lib/actions/user.actions";
 
 export default async function Page() {
+    // this function will get the user data from clerk for currently logged in user
     const user = await currentUser();
     if (!user) return null; // to avoid typescript warnings
 
+
+    // this function will get the data from mongoDb database 
     const userInfo = await fetchUser(user.id);
     if (userInfo?.onboarded) redirect("/");
 
@@ -29,6 +32,7 @@ export default async function Page() {
             </p>
 
             <section className="mt-9 bg-dark-2 p-10 rounded-2xl">
+                {/* reusable component */}
                 <AccountProfile
                     user={userData}
                     btnTitle="Continue" />
