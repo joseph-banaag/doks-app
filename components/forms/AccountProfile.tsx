@@ -40,7 +40,7 @@ interface Props {
 const AccountProfile = ({ user, btnTitle }: Props) => {
     const router = useRouter(); // this will be use to redirect the user to specified url
     const pathname = usePathname(); // this will check the current active url  
-    
+
     const { startUpload } = useUploadThing("media");
 
     const [files, setFiles] = useState<File[]>([]);
@@ -123,6 +123,13 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
                     render={({ field }) => (
                         <FormItem className='flex items-center gap-4'>
                             <FormLabel className='account-form_image-label'>
+
+                                {/* 
+                                - dynamic block code consist of logic checking the if the profile photo is available and if not assign default value or update value from user 
+                               
+                                - the value in field.value is equal to whatever in the FormField name.
+                               */}
+
                                 {field.value ? (
                                     <Image
                                         src={field.value}
