@@ -41,7 +41,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
     const router = useRouter(); // this will be use to redirect the user to specified url
     const pathname = usePathname(); // this will check the current active url  
 
-    const { startUpload } = useUploadThing("media");
+    const { startUpload } = useUploadThing("media"); // this line uses the function from uploadthing: https://docs.uploadthing.com/getting-started
 
     const [files, setFiles] = useState<File[]>([]);
 
@@ -54,9 +54,11 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
             username: user?.username ? user.username : "",
             bio: user?.bio ? user.bio : "",
         },
+
+        // profile_photo: user?.image ? user.image : "", and other are using ternary operator.
     });
 
-
+    // this function will connect to the database and update the user information
     const onSubmit = async (values: z.infer<typeof UserValidation>) => {
         const blob = values.profile_photo;
 
@@ -69,6 +71,14 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
             }
         }
 
+        /* 
+        
+        - this line was created after creating the option to connect to the data base.
+         
+         - create mongoose component to have a handshake between local to database
+         - once the connection has been established, updateUser() function is the function that sends the information to the database and it uses database command of User.FindOneAndUpdate()
+
+        */
         await updateUser({
             name: values.name,
             path: pathname,
@@ -86,7 +96,8 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
     };
 
 
-
+    // ChangeEvent here is coming form react. see import 
+    // this code will update the user profile photo form local machine
     const handleImage = (
         e: ChangeEvent<HTMLInputElement>,
         fieldChange: (value: string) => void
@@ -124,10 +135,12 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
                         <FormItem className='flex items-center gap-4'>
                             <FormLabel className='account-form_image-label'>
 
-                                {/* 
+                                {/*
+                                
                                 - dynamic block code consist of logic checking the if the profile photo is available and if not assign default value or update value from user 
                                
                                 - the value in field.value is equal to whatever in the FormField name.
+
                                */}
 
                                 {field.value ? (
